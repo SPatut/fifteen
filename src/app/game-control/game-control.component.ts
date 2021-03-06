@@ -9,8 +9,9 @@ export class GameControlComponent implements  OnInit {
 
   constructor() { }
   counter: number;
-  gameStatus = 'Сыграем?';
-  bone = [ 8, 15, 1, 11, 5, 12, 6, 3, 2, 0, 9, 13, 10, 4, 14, 7] ;
+  gameStatus = '';
+  boneWin = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] ;
+  bone = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] ;
   boneStatus = [false, false , false, false, false, false , false, false, false, false , false, false, false, false , false, false];
   indexZero: number;
 
@@ -21,13 +22,13 @@ export class GameControlComponent implements  OnInit {
   onStart() {
     this.shuffleBone(this.bone);
     this.counter = 0;
-    this.gameStatus = '....';
+    this.gameStatus = 'Playing';
     this.setBoneStatus();
   }
 
   // tslint:disable-next-line:typedef
   onStop() {
-    this.gameStatus = 'Сыграем?';
+    this.gameStatus = '';
     for (let i = 0; i < this.boneStatus.length; i++) {this.boneStatus[i] = false; }
   }
 
@@ -52,15 +53,21 @@ export class GameControlComponent implements  OnInit {
     this.bone[this.indexZero] = this.bone[indexBone];
     this.bone[indexBone] = 0;
     this.setBoneStatus();
+    if (this.boneWinCompare()) {
+      this.gameStatus = 'You win!';
+      for (let i = 0; i < this.boneStatus.length; i++) {this.boneStatus[i] = false; }
+    }
   }
-
- 
+  // tslint:disable-next-line:typedef
   shuffleBone(boneField) {
     for (let i = boneField.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [boneField[i], boneField[j]] = [boneField[j], boneField[i]];
     }
   }
+  boneWinCompare(): boolean  {
+        if (JSON.stringify(this.boneWin) !== JSON.stringify(this.bone)) {
+          return false; }
+        else { return  true; }
 }
-
-
+}

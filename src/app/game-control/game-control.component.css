@@ -9,5 +9,9 @@
   width: 100px;
   height: 50px;
 }
-
+.btn-danger , .btn-secondary{
+  margin:3px;
+  width: 200px;
+  height: 50px;
+}
 
