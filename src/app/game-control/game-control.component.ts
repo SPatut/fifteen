@@ -20,7 +20,7 @@ export class GameControlComponent implements  OnInit {
 
   // tslint:disable-next-line:typedef
   onStart() {
-    this.shuffleBone(this.bone);
+    this.shuffleBone();
     this.counter = 0;
     this.gameStatus = 'Playing';
     this.setBoneStatus();
@@ -40,9 +40,15 @@ export class GameControlComponent implements  OnInit {
         this.boneStatus[i] = false;
         this.indexZero = i;
         if ((i + 1 ) <= this.boneStatus.length) { this.boneStatus[ i + 1 ] = true; }
-        if ((i - 1 ) >= 0) { this.boneStatus[ i - 1 ] = true; }
+        if ((i - 1 ) >= 0 ) { this.boneStatus[ i - 1 ] = true; }
         if ((i + 4 ) <= this.boneStatus.length) { this.boneStatus[ i + 4 ] = true; }
         if ((i - 4 ) >= 0) { this.boneStatus[ i - 4 ] = true; }
+        if (i === 4) { this.boneStatus[3] = false; }
+        if (i === 8) { this.boneStatus[7] = false; }
+        if (i === 12) { this.boneStatus[11] = false; }
+        if (i === 3) { this.boneStatus[4] = false; }
+        if (i === 7) { this.boneStatus[8] = false; }
+        if (i === 11) { this.boneStatus[12] = false; }
       }
     }
   }
@@ -59,15 +65,33 @@ export class GameControlComponent implements  OnInit {
     }
   }
   // tslint:disable-next-line:typedef
-  shuffleBone(boneField) {
-    for (let i = boneField.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [boneField[i], boneField[j]] = [boneField[j], boneField[i]];
+  shuffleBone() {
+    this.setBoneStatus();
+    for (let k = 300 ; k > 0; k--) {
+      this.makeStep();
     }
   }
   boneWinCompare(): boolean  {
         if (JSON.stringify(this.boneWin) !== JSON.stringify(this.bone)) {
           return false; }
         else { return  true; }
-}
+  }
+  // tslint:disable-next-line:typedef
+   makeStep() {
+    for (let i = 0; i < this.bone.length; i++) {
+       if (this.boneStatus[i] === true) {
+         for (let j = 0; j < this.bone.length; j++) {
+           if (this.bone[j] === 0) {
+             const k = Math.floor(Math.random() * 2);
+             if (k === 0) {
+               [this.bone[i], this.bone[j]] = [this.bone[j], this.bone[i]];
+               i = this.bone.length;
+               this.setBoneStatus();
+             }
+             break;
+           }
+         }
+       }
+    }
+  }
 }
