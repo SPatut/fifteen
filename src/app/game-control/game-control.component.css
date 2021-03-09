@@ -3,6 +3,7 @@
   margin:1px;
   width: 100px;
   height: 100px;
+  box-shadow: 0 0 0 .1rem white;
 }
 .btn-outline-success,.btn-outline-danger,.btn-outline-secondary  {
   margin:3px;

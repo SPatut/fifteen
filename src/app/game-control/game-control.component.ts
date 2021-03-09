@@ -67,7 +67,7 @@ export class GameControlComponent implements  OnInit {
   // tslint:disable-next-line:typedef
   shuffleBone() {
     this.setBoneStatus();
-    for (let k = 300 ; k > 0; k--) {
+    for (let k = 1000 ; k > 0; k--) {
       this.makeStep();
     }
   }
