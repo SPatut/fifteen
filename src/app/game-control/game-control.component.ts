@@ -10,8 +10,8 @@ export class GameControlComponent implements  OnInit {
   constructor() { }
   counter: number;
   gameStatus = '';
-  boneWin = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] ;
-  bone = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] ;
+  boneWin = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] ;
+  bone = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] ;
   boneStatus = [false, false , false, false, false, false , false, false, false, false , false, false, false, false , false, false];
   indexZero: number;
 
